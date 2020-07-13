@@ -14,10 +14,10 @@ class GUI {
   long tick = 0;
 
   // main text input field
-  GTextField input = null;
+  TextInput input = null;
 
   //
-  GLabel[] outputs = null;
+  //  GLabel[] outputs = null;
 
   // taille de entrées / sorties textes
   int xInput = width/2-width/6;
@@ -40,21 +40,15 @@ void createGUI() {
   // Fontes par défaut ?
   gui.defaultFont = createFont("Times New Roman", gui.fontSize);
   textFont(gui.defaultFont);
-  G4P.setInputFont("Times New Roman", G4P.PLAIN, gui.fontSize); 
-  G4P.setDisplayFont("Times New Roman", G4P.PLAIN, gui.fontSize); 
-  G4P.setGlobalColorScheme(G4P.BLUE_SCHEME);
   //
-  gui.input = new GTextFieldExt(this, gui.xInput, gui.yInput, gui.wInput, gui.hInput);
-  gui.input.setPromptText("Input your commands!");
-  gui.input.setOpaque(true);
-  gui.input.setText("");
+  gui.input = new TextInput(gui.xInput, gui.yInput, gui.wInput, gui.hInput);
 
   //
-  gui.outputs = new GLabel[gui.nbInput];
-  for (int i=1; i<gui.nbInput; i++) {
-    gui.outputs[i-1] = new GLabel(this, gui.xInput, gui.yInput-(i+1)*gui.hInput, gui.wInput, gui.hInput);
-    gui.outputs[i-1].setText("--");
-  }
+  //gui.outputs = new GLabel[gui.nbInput];
+  //for (int i=1; i<gui.nbInput; i++) {
+  //  gui.outputs[i-1] = new GLabel(this, gui.xInput, gui.yInput-(i+1)*gui.hInput, gui.wInput, gui.hInput);
+  //  gui.outputs[i-1].setText("--");
+  //}
 }
 
 // remanence
@@ -81,5 +75,10 @@ void tickGUI() {
     rect(gui.xInput, gui.yInput-(i+1)*gui.hInput, gui.wInput, gui.hInput);
   }
   //
-  gui.input.setFocus(true);
+  gui.input.draw();
+}
+
+//
+void keyPressed() {
+   gui.input.update(); 
 }
