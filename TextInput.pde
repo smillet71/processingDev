@@ -26,10 +26,12 @@ class TextInput {
         println("UP");
       } else if (keyCode == DOWN) {
         println("DOWN");
-      } else if (keyCode == TAB) {
-        completeInput();
       }
     } 
+    //
+    else if (keyCode == TAB) {
+      completeInput();
+    }    
     // caractères
     else if ((keyCode == BACKSPACE)&&(txt.length()>0)) {
       txt=txt.substring(0, txt.length()-1);
