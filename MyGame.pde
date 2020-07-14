@@ -17,15 +17,22 @@ public void settings() {
 
 // application des paramètres d'entrée
 public void setup() {
+  
   // Initialisation de l'application
-  frameRate(20);
+  frameRate(30);
   colorMode(RGB);
   noFill();
+  
   //
   cp = new CommandProcessor();
+  cp.addCommand(tokensTestCommand1);
+  cp.addCommand(tokensTestCommand2);
+  cp.addCommand(tokensTestCommand3);
+  cp.addCommand(tokensTestCommand1);
   
   // création 
   createGUI();
+  
 }
 
 // mise à jour graphismes
