@@ -5,7 +5,7 @@ class TextInput {
 
   //
   int x, y, w, h;
-  String txt = "";
+  String intxt = "";
 
   //
   String characters=" !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
@@ -33,13 +33,17 @@ class TextInput {
       completeInput();
     }    
     // caractères
-    else if ((keyCode == BACKSPACE)&&(txt.length()>0)) {
-      txt=txt.substring(0, txt.length()-1);
+    else if ((keyCode == BACKSPACE)&&(intxt.length()>0)) {
+      intxt=intxt.substring(0, intxt.length()-1);
     } else if ((keyCode == ENTER) ||(keyCode == RETURN)) {
       applyInput();
-      txt="";
-    } else if ((characters.contains(""+key))&&(textWidth(txt+key)<w-10)) {
-      txt=txt+key;
+      intxt="";
+    } else if ((characters.contains(""+key))&&(textWidth(intxt+key)<w-10)) {
+      intxt=intxt+key;
+      // Ménage
+      if ((intxt.length()>0)&& (intxt.charAt(0) == ' ')) intxt=intxt.substring(1,intxt.length());
+      intxt = intxt.replace("  "," ");
+      //
       verifyInput();
     }
   }
@@ -54,7 +58,7 @@ class TextInput {
     rect(x, y, w, h);
     //
     textAlign(LEFT, TOP);
-    text(txt, x+5, y);
+    text(intxt, x+5, y);
   }
 
   // appliquer comportement appui sur Tabulation
@@ -64,11 +68,19 @@ class TextInput {
 
   // appliquer comportement appui sur un caractère
   public void verifyInput() { 
-    println("VERIFY "+txt);
+    Set<String> firstWords = cp.commandList.keySet();
+    boolean found = false;
+    for (String kword : firstWords) {
+      if (intxt.startsWith(kword.substring(0, intxt.length()-1))) {
+        found = true;
+        break;
+      }
+    }
+    println("VERIFY "+intxt+" "+found);
   }
 
   // appliquer comportement appui sur Entrée
   public void applyInput() { 
-    println("APPLY "+txt);
+    println("APPLY "+intxt);
   }
 }
